@@ -51,9 +51,9 @@ function sortear() {
     // Usa template string para inserir o array de números sorteados no texto
     resultado.innerHTML = `<label class="texto__paragrafo">Números sorteados: ${sorteados}</label>`;
 
-    // Mostra os números sorteados em uma janela de alerta
-    // Como "sorteados" é um array, ele aparece como uma lista separada por vírgulas
-    alert(sorteados);
+    // Chama a função "alterarStatusBotao"
+    // Essa função vai habilitar ou desabilitar o botão de reiniciar, dependendo do estado atual
+    alterarStatusBotao();
 }
 
 // Declara uma função chamada "obterNumeroAleatorio"
@@ -66,4 +66,30 @@ function obterNumeroAleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// Declara uma função chamada "alterarStatusBotao"
+// Essa função é responsável por alternar a aparência e o estado do botão de reiniciar
+function alterarStatusBotao() {
 
+    // Busca no HTML o elemento com id "btn-reiniciar"
+    // Esse é o botão que será habilitado ou desabilitado
+    let botao = document.getElementById('btn-reiniciar');
+
+    // Verifica se o botão contém a classe 'container__botao-desabilitado'
+    // Essa classe indica que o botão está atualmente desativado (não clicável)
+    if (botao.classList.contains('container__botao-desabilitado')) {
+
+        // Se o botão está desabilitado, remove essa classe
+        botao.classList.remove('container__botao-desabilitado');
+
+        // E adiciona a classe 'container__botao' para deixá-lo habilitado e visível como ativo
+        botao.classList.add('container__botao');
+
+    } else {
+        // Caso contrário, se o botão está ativo, o código faz o inverso:
+        // Remove a classe 'container__botao' (ativa)
+        botao.classList.remove('container__botao');
+
+        // E adiciona a classe 'container__botao-desabilitado' (desativa o botão)
+        botao.classList.add('container__botao-desabilitado');
+    }
+}
