@@ -15,6 +15,24 @@ function sortear() {
     // Representa o número final do intervalo
     let ate = parseInt(document.getElementById('ate').value);
 
+    // Verifica se o número inicial (campo "de") é maior ou igual ao número final (campo "até")
+    // Caso isso aconteça, o intervalo seria inválido (ex: de 10 até 5)
+    // Nesse caso, exibe um alerta informando o erro ao usuário
+    // E usa 'return' para encerrar a execução da função (nada mais abaixo será executado)
+    if (de >= ate) {
+        alert('Campo "Do número" deve ser inferior ao campo "Até o número". Verifique!');
+        return;
+    }
+
+    // Verifica se a quantidade de números solicitada é maior do que o total possível dentro do intervalo
+    // Exemplo: se o intervalo é de 1 a 5, há apenas 5 números possíveis.
+    // Se o usuário pedir 10 números, é impossível sem repetir.
+    // Nesse caso, o programa alerta o erro e encerra a função.
+    if (quantidade > (ate - de + 1)) {
+        alert('Campo "Quantidade" deve ser menor ou igual ao intervalo informado no campo "Do número" até o campo "Até o número". Verifique!');
+        return;
+    }
+
     // Cria um array vazio chamado "sorteados"
     // Esse array servirá para armazenar os números sorteados sem repetição
     let sorteados = [];
@@ -94,10 +112,25 @@ function alterarStatusBotao() {
     }
 }
 
+// Declara uma função chamada "reiniciar"
+// Ela é responsável por limpar os campos e redefinir o estado da aplicação
 function reiniciar() {
-    document.getElementById('quantidade').value = ''
-    document.getElementById('de').value = ''
-    document.getElementById('ate').value = ''
-    document.getElementById('resultado').innerHTML = '<label class="texto__paragrafo">Números sorteados:  nenhum até agora</label>'
+
+    // Limpa o valor digitado no campo de input com id "quantidade"
+    // O campo fica vazio novamente, pronto para um novo sorteio
+    document.getElementById('quantidade').value = '';
+
+    // Limpa o campo "de", que representa o número inicial do intervalo
+    document.getElementById('de').value = '';
+
+    // Limpa o campo "até", que representa o número final do intervalo
+    document.getElementById('ate').value = '';
+
+    // Atualiza o conteúdo da área de resultado para o estado inicial
+    // Exibe uma mensagem padrão informando que ainda não há números sorteados
+    document.getElementById('resultado').innerHTML = '<label class="texto__paragrafo">Números sorteados: nenhum até agora</label>';
+
+    // Chama a função "alterarStatusBotao"
+    // Essa função altera o estado do botão "Reiniciar" (ativa ou desativa)
     alterarStatusBotao();
 }
